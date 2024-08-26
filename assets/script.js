@@ -21,7 +21,6 @@ const slides = [
 let slider_img = document.querySelector(".banner-img");
 let img_path = "/assets/images/slideshow/";
 let slider_txt = document.querySelector("#banner p");
-let tag_line = slides[0].tagLine;
 
 // Slider's dots
 /* Creation of a list of dots */
@@ -61,8 +60,7 @@ arrow_left.addEventListener("click", (event) => {
   slider_img.src = img_path + slides[j].image;
 
   // change texte
-  // slide_txt = slides[j].tagLine;
-  // slider_txt.textContent = slide_txt;
+  slider_txt.innerHTML = slides[j].tagLine;
 });
 
 arrow_right.addEventListener("click", (event) => {
@@ -78,6 +76,5 @@ arrow_right.addEventListener("click", (event) => {
   slider_img.src = img_path + slides[j].image;
 
   // change the text
-  // slide_txt = slides[j].tagLine;
-  // slider_txt.textContent = slide_txt;
+  slider_txt.innerHTML = slides[j].tagLine;
 });
