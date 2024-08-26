@@ -18,29 +18,25 @@ const slides = [
     tagLine: "Autocollants <span>avec découpe laser sur mesure</span>",
   },
 ];
-let img_slider = document.querySelector(".banner-img");
-let img = slides[0].image;
-let slide_img = getSlideSrcValue(img);
-
-function getSlideSrcValue(img) {
-  let slide_img = img.split(".");
-  return slide_img[0];
-}
+let slider_img = document.querySelector(".banner-img");
+let img_path = "/assets/images/slideshow/";
+let slider_txt = document.querySelector("#banner p");
+let tag_line = slides[0].tagLine;
 
 // Slider's dots
 /* Creation of a list of dots */
 const div_dots = document.querySelector(".dots");
-let dotList = document.createElement("ul");
-div_dots.appendChild(dotList);
+let dot_list = document.createElement("ul");
+div_dots.appendChild(dot_list);
 let dot = "";
-let dots = dotList.childNodes;
+let dots = dot_list.childNodes;
 
 /* Filling the list */
 for (let i = 0; i < slides.length; i++) {
   dot = document.createElement("li");
-  dot.id = `slide${i + 1}`;
+  dot.id = slides[i].image;
   dot.classList.add("dot");
-  dotList.appendChild(dot);
+  dot_list.appendChild(dot);
 }
 
 /* Selected dot */
@@ -48,32 +44,40 @@ for (let i = 0; i < slides.length; i++) {
 const arrow_left = document.querySelector(".arrow_left");
 const arrow_right = document.querySelector(".arrow_right");
 let j = 0;
+let slide_img = slides[j].image;
 dots[j].classList.add("dot_selected");
 
 arrow_left.addEventListener("click", (event) => {
   event.preventDefault();
   j--;
-  slide_img = slides[j].image;
-  let slide_img_id = getSlideSrcValue(slide_img);
-  if (dots[j].id === slide_img_id) {
+  
+  // change selected dot
+  if (dots[j].id === slides[j].image) {
     dots[j + 1].classList.remove("dot_selected");
-    dots[j].classList.toggle("dot_selected");
+    dots[j].classList.add("dot_selected");
   }
-  let sliced_img = img_slider.src.slice(0, 46);
-  img = sliced_img + slide_img;
-  img_slider.src = img;
+
+  // change image
+  slider_img.src = img_path + slides[j].image;
+
+  // change texte
+  // slide_txt = slides[j].tagLine;
+  // slider_txt.textContent = slide_txt;
 });
 
 arrow_right.addEventListener("click", (event) => {
   event.preventDefault();
   j++;
-  slide_img = slides[j].image;
-  let slide_img_id = getSlideSrcValue(slide_img);
-  if (dots[j].id === slide_img_id) {
+  
+  // change the selected dot
+  if (dots[j].id === slides[j].image) {
     dots[j - 1].classList.remove("dot_selected");
-    dots[j].classList.toggle("dot_selected");
+    dots[j].classList.add("dot_selected");
   }
-  let sliced_img = img_slider.src.slice(0, 46);
-  img = sliced_img + slide_img;
-  img_slider.src = img;
+  // change the image
+  slider_img.src = img_path + slides[j].image;
+
+  // change the text
+  // slide_txt = slides[j].tagLine;
+  // slider_txt.textContent = slide_txt;
 });
