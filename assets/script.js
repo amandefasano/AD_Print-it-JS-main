@@ -27,12 +27,11 @@ let slider_txt = document.querySelector("#banner p");
 const div_dots = document.querySelector(".dots");
 let dot_list = document.createElement("ul");
 div_dots.appendChild(dot_list);
-let dot = "";
 let dots = dot_list.childNodes;
 
 /* Filling the list */
 for (let i = 0; i < slides.length; i++) {
-  dot = document.createElement("li");
+  let dot = document.createElement("li");
   dot.id = slides[i].image;
   dot.classList.add("dot");
   dot_list.appendChild(dot);
@@ -40,21 +39,26 @@ for (let i = 0; i < slides.length; i++) {
 
 /* Selected dot */
 // Slider's arrows
+let j = 0;
 const arrow_left = document.querySelector(".arrow_left");
 const arrow_right = document.querySelector(".arrow_right");
-let j = 0;
-let slide_img = slides[j].image;
+
+// First dot selected
 dots[j].classList.add("dot_selected");
 
+/* Event listener on left arrow */
 arrow_left.addEventListener("click", (event) => {
   event.preventDefault();
   j--;
-  
-  // change selected dot
-  if (dots[j].id === slides[j].image) {
-    dots[j + 1].classList.remove("dot_selected");
-    dots[j].classList.add("dot_selected");
+  dots[j + 1].classList.remove("dot_selected");
+
+  // Loop condition
+  if (j < 0) {
+    j = slides.length - 1;
   }
+
+  // change the selected dot
+  dots[j].classList.add("dot_selected");
 
   // change image
   slider_img.src = img_path + slides[j].image;
@@ -63,15 +67,20 @@ arrow_left.addEventListener("click", (event) => {
   slider_txt.innerHTML = slides[j].tagLine;
 });
 
+/* Event listener on right arrow */
 arrow_right.addEventListener("click", (event) => {
   event.preventDefault();
   j++;
-  
-  // change the selected dot
-  if (dots[j].id === slides[j].image) {
-    dots[j - 1].classList.remove("dot_selected");
-    dots[j].classList.add("dot_selected");
+  dots[j - 1].classList.remove("dot_selected");
+
+  // Loop condition
+  if (j >= slides.length) {
+    j = 0;
   }
+
+  // change the selected dot
+  dots[j].classList.add("dot_selected");
+
   // change the image
   slider_img.src = img_path + slides[j].image;
 
