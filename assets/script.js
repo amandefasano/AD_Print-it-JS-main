@@ -19,7 +19,7 @@ const slides = [
   },
 ];
 let slider_img = document.querySelector(".banner-img");
-let img_path = "/assets/images/slideshow/";
+let img_path = "./assets/images/slideshow/";
 let slider_txt = document.querySelector("#banner p");
 
 // Slider's dots
