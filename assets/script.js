@@ -47,8 +47,7 @@ const arrow_right = document.querySelector(".arrow_right");
 dots[j].classList.add("dot_selected");
 
 /* Event listener on left arrow */
-arrow_left.addEventListener("click", (event) => {
-  event.preventDefault();
+arrow_left.addEventListener("click", () => {
   j--;
   dots[j + 1].classList.remove("dot_selected");
 
@@ -68,8 +67,7 @@ arrow_left.addEventListener("click", (event) => {
 });
 
 /* Event listener on right arrow */
-arrow_right.addEventListener("click", (event) => {
-  event.preventDefault();
+arrow_right.addEventListener("click", () => {
   j++;
   dots[j - 1].classList.remove("dot_selected");
 
