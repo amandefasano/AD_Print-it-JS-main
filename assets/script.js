@@ -24,9 +24,7 @@ let slider_txt = document.querySelector("#banner p");
 
 // Slider's dots
 /* Creation of a list of dots */
-const div_dots = document.querySelector(".dots");
-let dot_list = document.createElement("ul");
-div_dots.appendChild(dot_list);
+let dot_list = document.querySelector("dots_list");
 let dots = dot_list.childNodes;
 
 /* Filling the list */
