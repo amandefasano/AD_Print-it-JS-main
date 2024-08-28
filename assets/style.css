@@ -141,7 +141,7 @@ header {
 	display: flex;
 }
 
-.dots ul {
+.dots_list {
 	display: flex;
 	flex-direction: row;
 }
