@@ -24,15 +24,15 @@ let slider_txt = document.querySelector("#banner p");
 
 // Slider's dots
 /* Creation of a list of dots */
-let dot_list = document.querySelector("dots_list");
-let dots = dot_list.childNodes;
+let dots_list = document.querySelector("dots_list");
+let dots = dots_list.childNodes;
 
 /* Filling the list */
 for (let i = 0; i < slides.length; i++) {
   let dot = document.createElement("li");
   dot.id = slides[i].image;
   dot.classList.add("dot");
-  dot_list.appendChild(dot);
+  dots_list.appendChild(dot);
 }
 
 /* Selected dot */
