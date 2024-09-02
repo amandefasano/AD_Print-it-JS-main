@@ -25,7 +25,6 @@ let slider_txt = document.querySelector("#banner p");
 // Slider's dots
 /* Creation of a list of dots */
 let dots_list = document.querySelector("dots_list");
-let dots = dots_list.childNodes;
 
 /* Filling the list */
 for (let i = 0; i < slides.length; i++) {
@@ -42,6 +41,7 @@ const arrow_left = document.querySelector(".arrow_left");
 const arrow_right = document.querySelector(".arrow_right");
 
 // First dot selected
+let dots = dots_list.childNodes;
 dots[j].classList.add("dot_selected");
 
 /* Event listener on left arrow */
