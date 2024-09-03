@@ -29,7 +29,6 @@ let dots_list = document.querySelector(".dots_list");
 /* Filling the list */
 for (let i = 0; i < slides.length; i++) {
   let dot = document.createElement("li");
-  dot.id = slides[i].image;
   dot.classList.add("dot");
   dots_list.appendChild(dot);
 }
