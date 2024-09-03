@@ -1,4 +1,4 @@
-// Slider's images
+// Slider's images and taglines
 const slides = [
   {
     image: "slide1.jpg",
@@ -18,67 +18,68 @@ const slides = [
     tagLine: "Autocollants <span>avec découpe laser sur mesure</span>",
   },
 ];
-let slider_img = document.querySelector(".banner-img");
+let slider_img_element = document.querySelector(".banner-img");
 let img_path = "./assets/images/slideshow/";
-let slider_txt = document.querySelector("#banner p");
+let slider_txt_element = document.querySelector("#banner p");
 
 // Slider's dots
-/* Creation of a list of dots */
-let dots_list = document.querySelector(".dots_list");
-
-/* Filling the list */
+let dots_list_element = document.querySelector(".dots_list");
+/* Filling the list of dots */
 for (let i = 0; i < slides.length; i++) {
-  let dot = document.createElement("li");
-  dot.classList.add("dot");
-  dots_list.appendChild(dot);
+  let dot_element = document.createElement("li");
+  dot_element.classList.add("dot");
+  dots_list_element.appendChild(dot_element);
 }
+let dots_element = dots_list_element.childNodes;
 
-/* Selected dot */
 // Slider's arrows
-let j = 0;
-const arrow_left = document.querySelector(".arrow_left");
-const arrow_right = document.querySelector(".arrow_right");
+const arrow_left_element = document.querySelector(".arrow_left");
+const arrow_right_element = document.querySelector(".arrow_right");
 
-// First dot selected
-let dots = dots_list.childNodes;
-dots[j].classList.add("dot_selected");
+/**
+ 
+ * Builds the slider by changing the selected dot, the image and the text.
+ 
+ * @param {number} index - The index that is used to determine the upcoming slide.
 
-/* Event listener on left arrow */
-arrow_left.addEventListener("click", () => {
-  j--;
-  dots[j + 1].classList.remove("dot_selected");
-
+ * @returns {number} - The index that may have been changed.
+ 
+ */
+function buildSlider(index) {
   // Loop condition
-  if (j < 0) {
-    j = slides.length - 1;
+  if (index < 0) {
+    index = slides.length - 1;
+  } else if (index >= slides.length) {
+    index = 0;
   }
 
   // change the selected dot
-  dots[j].classList.add("dot_selected");
+  dots_element[index].classList.add("dot_selected");
 
   // change image
-  slider_img.src = img_path + slides[j].image;
+  slider_img_element.src = img_path + slides[index].image;
 
   // change texte
-  slider_txt.innerHTML = slides[j].tagLine;
+  slider_txt_element.innerHTML = slides[index].tagLine;
+
+  return index;
+}
+
+// Initialization
+let slider_index = 0;
+// First dot selected
+dots_element[slider_index].classList.add("dot_selected");
+
+/* Event listener on left arrow */
+arrow_left_element.addEventListener("click", () => {
+  dots_element[slider_index].classList.remove("dot_selected");
+  slider_index--;
+  slider_index = buildSlider(slider_index);
 });
 
 /* Event listener on right arrow */
-arrow_right.addEventListener("click", () => {
-  j++;
-  dots[j - 1].classList.remove("dot_selected");
-
-  // Loop condition
-  if (j >= slides.length) {
-    j = 0;
-  }
-
-  // change the selected dot
-  dots[j].classList.add("dot_selected");
-
-  // change the image
-  slider_img.src = img_path + slides[j].image;
-
-  // change the text
-  slider_txt.innerHTML = slides[j].tagLine;
+arrow_right_element.addEventListener("click", () => {
+  dots_element[slider_index].classList.remove("dot_selected");
+  slider_index++
+  slider_index = buildSlider(slider_index);
 });
