@@ -41,18 +41,9 @@ const arrow_right_element = document.querySelector(".arrow_right");
  * Builds the slider by changing the selected dot, the image and the text.
  
  * @param {number} index - The index that is used to determine the upcoming slide.
-
- * @returns {number} - The index that may have been changed.
  
  */
 function buildSlider(index) {
-  // Loop condition
-  if (index < 0) {
-    index = slides.length - 1;
-  } else if (index >= slides.length) {
-    index = 0;
-  }
-
   // change the selected dot
   dots_element[index].classList.add("dot_selected");
 
@@ -61,8 +52,6 @@ function buildSlider(index) {
 
   // change texte
   slider_txt_element.innerHTML = slides[index].tagLine;
-
-  return index;
 }
 
 // Initialization
@@ -74,12 +63,24 @@ dots_element[slider_index].classList.add("dot_selected");
 arrow_left_element.addEventListener("click", () => {
   dots_element[slider_index].classList.remove("dot_selected");
   slider_index--;
-  slider_index = buildSlider(slider_index);
+
+  // Loop condition
+  if (slider_index < 0) {
+    slider_index = slides.length - 1;
+  }
+
+  buildSlider(slider_index);
 });
 
 /* Event listener on right arrow */
 arrow_right_element.addEventListener("click", () => {
   dots_element[slider_index].classList.remove("dot_selected");
-  slider_index++
-  slider_index = buildSlider(slider_index);
+  slider_index++;
+
+  // Loop condition
+  if (slider_index >= slides.length) {
+    slider_index = 0;
+  }
+
+  buildSlider(slider_index);
 });
